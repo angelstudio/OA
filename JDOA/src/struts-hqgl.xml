@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<!-- 车辆管理 -->
+	<package name="clgl" extends="struts-default" namespace="/">
+		<action name="getClglList" class="com.jdoa.basic.hqgl.action.ClglAction" method="getClglList">
+			<param name="aliasname">用车管理</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="saveClglxx" class="com.jdoa.basic.hqgl.action.ClglAction" method="saveClglxx">
+			<param name="aliasname">保存新增车辆信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="deleteClglxx" class="com.jdoa.basic.hqgl.action.ClglAction" method="deleteClglxx">
+			<param name="aliasname">删除车辆信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+	</package>
+</struts>

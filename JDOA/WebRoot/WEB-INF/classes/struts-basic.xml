@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<package name="non-authority" extends="struts-default"
+		namespace="/">
+		<!--登录 -->
+		<global-results>
+			<result>/login.jsp</result>
+		</global-results>
+
+		<!--用户注销 -->
+		<action name="logout" class="loginAction" method="userLogout">
+			<result name="success">userlogin.jsp</result>
+			<result name="loginerror">userlogin.jsp</result>
+		</action>
+		<action name="userLogin" class="loginAction" method="userLogin">
+			<result name="success" type="redirect">
+				jsp/basic/index.jsp
+			</result>
+			<result name="loginerror" >userlogin.jsp</result>
+		</action>
+		<action name="image" class="Login" method="Image">
+			<result name="success">loinSuccess.jsp</result>
+		</action>
+		<action name="getMainUrl" class="mainAction" method="getMainUrl">
+			<param name="aliasname">用户_主页</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="findCacheMenu" class="menuAction" method="findCacheMenu">
+			<param name="aliasname">菜单_查询当前</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryAllMenu" class="menuAction" method="queryAllMenu">
+			<param name="aliasname">菜单_查询</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="operMenu" class="menuAction" method="operMenu">
+			<param name="aliasname">菜单_操作</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="getTable" class="menuAction" method="getTable">
+			<param name="aliasname">获取表格列表</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryAllOrg" class="orgAction" method="queryAllOrg">
+			<param name="aliasname">查询组织信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="addOrg" class="orgAction" method="addOrg">
+			<param name="aliasname">添加组织信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="editOrg" class="orgAction" method="editOrg">
+			<param name="aliasname">修改组织信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="delOrg" class="orgAction" method="delOrg">
+			<param name="aliasname">删除组织信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="getOrg" class="personAction" method="getOrg">
+			<param name="aliasname">获取组织信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="savePerson" class="personAction" method="savePerson">
+			<param name="aliasname">保存人员信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryPerson" class="personAction" method="queryPerson">
+			<param name="aliasname">查询人员信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryEmployee" class="personAction" method="queryEmployee">
+			<param name="aliasname">查询人员通讯录</param>
+			<param name="queryEmployee">-1</param>
+		</action>
+		<action name="editPerson" class="personAction" method="editPerson">
+			<param name="aliasname">修改人员信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="delPerson" class="personAction" method="delPerson">
+			<param name="aliasname">删除人员信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+	</package>
+
+
+	<!-- 编码 -->
+	<package name="admin"  namespace="/" extends="json-default">
+		<interceptors>
+			<!--定义一个名为authority的拦截器 -->
+			<interceptor class="com.jdoa.tool.AuthorityInterceptor"
+				name="authority" />
+			<!--定义一个包含权限检查的拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<!--配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" />
+				<!--配置自定义的拦截器 -->
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mydefault" />
+		<global-results>
+			<result>/login.jsp</result>
+			<result name="login" type="redirect">userlogin.jsp</result>
+		</global-results>
+		<action name="queryBill" class="queryAction" method="queryBill">
+			<param name="aliasname">查询流程表单</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryAction" class="queryAction" method="queryAction">
+			<param name="aliasname">查询表单Action</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryBillField" class="queryAction" method="queryBillField">
+			<param name="aliasname">查询表单字段信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryUser" class="queryAction" method="queryUser">
+			<param name="aliasname">查询用户信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_queryRoleData" class="queryAction" method="jbpm_queryRoleData">
+			<param name="aliasname">查询角色信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_queryDeptData" class="queryAction" method="jbpm_queryDeptData">
+			<param name="aliasname">查询部门信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+			<!-- 保存临时xml数据 -->
+		<action name="jbpm_saveProcessTempDataXml" class="jbpmAction" method="jbpm_saveProcessTempDataXml">
+		    <param name="aliasname">保存流程信息</param>
+			<param name="authoritytype">-1</param>
+			<result type="json"></result>
+		</action>
+		<action name="jbpm_saveProcess" class="jbpmAction" method="jbpm_saveProcess">
+		    <param name="aliasname">保存流程信息</param>
+			<param name="authoritytype">-1</param>
+			<result type="json"></result>
+		</action>
+		<action name="jbpm_getProcessList" class="queryAction"  method="jbpm_getProcessList">
+			<param name="aliasname">查询流程信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 通过流程ID删除流程信息 -->
+		<action name="deleteProcess" class="queryAction"  method="deleteProcess">
+		    <param name="aliasname">删除流程信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_deployProcess" class="jbpmAction" method="jbpm_deployProcess">
+			<result type="json"></result>
+			<param name="aliasname">部署流程信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_unDeployProcess" class="jbpmAction" method="jbpm_unDeployProcess">
+			<result type="json"></result>
+			<param name="aliasname">流程反部署</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 通过流程ID启动流程 -->
+		<action name="startProcess" class="queryAction" method="startProcess">
+		    <param name="aliasname">启用流程</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 通过流程ID停用流程 -->
+		<action name="stopProcess" class="queryAction" method="stopProcess">
+		    <param name="aliasname">停止流程</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 提交启用流程 -->
+		<action name="jbpmSubmit" class="jbpmMethod" method="jbpmSubmit">
+		    <param name="aliasname">提交流程</param>
+			<param name="authoritytype">0</param>
+		</action>
+		<!-- 获取消息 -->
+		<action name="getJBPMMessage" class="queryAction" method="getJBPMMessage">
+		    <param name="aliasname">获取消息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- index页面获取消息数量 -->
+		<action name="getMessage" class="queryAction" method="getMessage">
+			<param name="aliasname">用户_消息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 流程表单配置 -->
+		<action name="jbpm_Form_List" class="queryAction" method="jbpm_Form_List">
+		    <param name="aliasname">查询表单信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_Form_Deal" class="formAction" method="jbpm_Form_Deal">
+		    <param name="aliasname">处理表单信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_Form_SJJC" class="formAction" method="jbpm_Form_SJJC">
+		    <param name="aliasname">表单数据检查</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_ZDXX_List" class="queryAction" method="jbpm_ZDXX_List">
+		    <param name="aliasname">表单字段信息查询</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_ZDXX_Deal" class="formAction" method="jbpm_ZDXX_Deal">
+		    <param name="aliasname">处理字段信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_ANXX_List" class="queryAction" method="jbpm_ANXX_List">
+		    <param name="aliasname">查询按钮信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_ANXX_Deal" class="formAction" method="jbpm_ANXX_Deal">
+		    <param name="aliasname">处理按钮信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_QQPZXX_List" class="queryAction" method="jbpm_QQPZXX_List">
+		    <param name="aliasname">请求信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_QQPZXX_Deal" class="formAction" method="jbpm_QQPZXX_Deal">
+		    <param name="aliasname">处理请求信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="beforeDeal" class="jbpmMethod" method="beforeDeal">
+		    <param name="aliasname">流程判断</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_Form_URL" class="queryAction" method="jbpm_Form_URL">
+		    <param name="aliasname">查询URL</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="getAllControlButInfo" class="queryAction" method="getAllControlButInfo">
+		    <param name="aliasname">查询button</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="getAllControlButInfo" class="queryAction" method="getAllControlButInfo">
+		    <param name="aliasname">查询button</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="getFormTableInfo" class="queryAction" method="getFormTableInfo">
+		    <param name="aliasname">查询字段信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpm_Add_FORM" class="queryAction" method="jbpm_Add_FORM">
+		   <param name="aliasname">添加表单信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="jbpmAudit" class="jbpmMethod" method="jbpmAudit">
+		    <param name="aliasname">JBPM审核</param>
+			<param name="authoritytype">-1</param>
+		</action>
+			<!-- 通过流程id获得流程的原始xml -->
+		<action name="selectXmlFromProcess" class="jbpmAction"
+			method="selectXmlFromProcess">
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 通过流程id获得流程完成节点的情况 -->
+		<action name="selectCompletedNodeFromProcess" class="jbpmAction"
+			method="selectCompletedNodeFromProcess">
+			<param name="authoritytype">-1</param>
+		</action>
+		
+			<!-- 在火狐浏览器中查看审核信息 -->
+		<action name="selectProcessStatusData" class="jbpmAction"
+			method="selectProcessStatusData">
+			<param name="authoritytype">-1</param>
+		</action>
+	</package>
+	
+</struts>

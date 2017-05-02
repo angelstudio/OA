@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="T_JBPMSYSTaskInfo">
+	<resultMap id="T_BP_Process_Result" class="com.jdoa.jbpm.model.ProcessInfo">
+		<result column="fid" property="id" jdbcType="VARCHAR" />
+		<result column="fnumber" property="number" jdbcType="VARCHAR" />
+		<result column="fname" property="name" jdbcType="VARCHAR" />
+		<result column="faliasName" property="aliasName" jdbcType="VARCHAR" />
+		<result column="fcreatetime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="fcreator" property="creator" jdbcType="VARCHAR" />
+		<result column="flastUpdateTime" property="lastUpdateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="flastUpdateUser" property="lastUpdateUser"
+			jdbcType="VARCHAR" />
+		<result column="fstatus" property="status" jdbcType="VARCHAR" />
+		<result column="fbillTypeID" property="billTypeID" jdbcType="VARCHAR" />
+		<result column="fdeploymentID" property="deploymentID"
+			jdbcType="VARCHAR" />
+		<result column="fxml" property="xml" jdbcType="CLOB"
+			javaType="java.lang.String" />
+		<result column="fstarttype" property="starttype" jdbcType="VARCHAR" />
+		<result column="fstarttask" property="starttask" jdbcType="VARCHAR" />
+		<result column="fparams" property="params" jdbcType="VARCHAR" />
+		<result column="fassigner" property="assigner" jdbcType="VARCHAR" />
+	</resultMap>
+	<parameterMap id="bp_process_params" class="com.jdoa.jbpm.model.ProcessInfo">
+		<parameter property="id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="number" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="aliasName" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="createTime" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+		<parameter property="creator" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="lastUpdateTime" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+		<parameter property="lastUpdateUser" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<parameter property="status" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="billTypeID" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<parameter property="deploymentID" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<parameter property="starttype" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="starttask" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="params" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="assigner" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="xml" jdbcType="CLOB" javaType="java.lang.String" />
+	</parameterMap>
+	<parameterMap class="com.jdoa.jbpm.model.TempXml"
+		id="bp_process_tempxml">
+		<parameter property="fid" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="fprocessId" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<parameter property="fname" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="fnumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="fcreateTime" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<parameter property="fcreator" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<parameter property="ftempXml" jdbcType="CLOB" javaType="java.lang.String" />
+	</parameterMap>
+	<select id="T_BP_Process_Select" resultMap="T_BP_Process_Result"
+		parameterClass="String">
+		select fid, fnumber, fname, faliasName,
+		fcreatetime,fcreator,flastUpdateTime,flastUpdateUser,fstatus,fbillTypeID,fxml,fstarttype,fstarttask,fparams,fassigner,fdeploymentID
+		from
+		T_BP_PROCESS
+		where
+		fid=#id#
+	</select>
+	<select id="T_BP_Process_SelectByTaskAndParams" resultMap="T_BP_Process_Result"
+		parameterClass="com.jdoa.jbpm.model.ProcessInfo">
+		select fid, fnumber, fname, faliasName,
+		fcreatetime,fcreator,flastUpdateTime,flastUpdateUser,fstatus,fbillTypeID,fdeploymentID,fxml,fstarttype,fstarttask,fparams,fassigner
+		from
+		T_BP_PROCESS
+		where fstatus='2' and (fstarttype='t_bill' or
+		fstarttype='t_base')
+		<isNotNull prepend=" and " property="starttype">
+			fstarttype =
+			#starttype:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend=" and " property="starttask">
+			fstarttask =
+			#starttask:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend=" and " property="params">
+			fparams =
+			#params:VARCHAR#
+		</isNotNull>
+	</select>
+	<select id="T_BP_Process_selectALL" resultMap="T_BP_Process_Result" parameterClass="java.util.Map">
+		SELECT * FROM (SELECT A.*, ROWNUM RN FROM  (select
+		fid,fnumber, fname, faliasName,fcreatetime,fcreator,flastUpdateTime,flastUpdateUser,
+		fstatus,fbillTypeID,case when fdeploymentID is null then '未部署' else '部署' end as fdeploymentID ,fxml,fstarttype,fstarttask,fparams,fassigner
+		from T_BP_PROCESS order by fcreatetime desc) A ) B 
+		WHERE B.RN <![CDATA[ <=#limit#]]> AND  B.RN >#start#
+	</select>
+	<select id="T_BP_Process_selectCount" resultClass="java.lang.Integer">
+		select count(*) from T_BP_PROCESS
+	</select>
+	<delete id="T_BP_Process_deleteAll">
+		<!--
+			WARNING - This element is automatically generated by Abator for
+			iBATIS, do not modify. This element was generated on Wed Oct 17
+			11:59:50 CST 2012.
+		-->
+		delete from T_BP_PROCESS
+
+	</delete>
+	<delete id="T_BP_Process_deleteByID" parameterClass="java.lang.String">
+		DELETE FROM
+		T_BP_PROCESS WHERE fid =#fprocessId#
+	</delete>
+	<insert id="bp_tempxml_insert" parameterMap="bp_process_tempxml">
+		insert
+		into
+		t_bp_processtempdata (fid, fprocessId, fname,
+		fnumber,fcreatetime,fcreator,ftempXml)
+		values
+		(?,?,?,?,?,?,?)
+	</insert>
+	<insert id="T_BP_Process_insert" parameterMap="bp_process_params">
+		insert
+		into
+		T_BP_PROCESS (fid, fnumber, fname,
+		faliasName,fcreatetime,fcreator,flastUpdateTime,flastUpdateUser,fstatus,fbillTypeID,fdeploymentID,fstarttype,fstarttask,fparams,fassigner,fxml)
+		values
+		(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+	</insert>
+	<update id="T_BP_Process_update_1" parameterClass="com.jdoa.jbpm.model.ProcessInfo">
+		update
+		T_BP_PROCESS set
+		fnumber
+		=#number#,fname =#name#,
+		faliasName
+		=#aliasName#,
+		fcreatetime
+		=#createTime#,
+		fcreator =#creator#,
+		flastUpdateTime =#lastUpdateTime#,
+		flastUpdateUser =#lastUpdateUser#,
+		fstatus =#status#,
+		fbillTypeID
+		=#billTypeID#,
+		fdeploymentID
+		=#deploymentID#,
+		fstarttype=#starttype#,
+		fstarttask=#starttask#,
+		fparams=#params#,
+		fassigner=#assigner#,
+		fxml=#xml#
+		where
+		fid=#id#
+	</update>
+	<update id="
+		T_BP_Process_update " parameterClass="com.jdoa.jbpm.model.ProcessInfo">
+		update T_BP_PROCESS
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="number">
+				fnumber =
+				#number:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="name">
+				fname =
+				#name:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="aliasName">
+				faliasName =
+				#aliasName:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime">
+				fcreatetime =
+				#createTime:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="creator">
+				fcreator =
+				#creator:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="lastUpdateTime">
+				flastUpdateTime =
+				#lastUpdateTime:TIMESTAMP#
+			</isNotNull>
+			<isNotNull prepend="," property="lastUpdateUser">
+				flastUpdateUser =
+				#lastUpdateUser:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				fstatus =
+				#status:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="billTypeID">
+				fbillTypeID =
+				#billTypeID:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="xml">
+				fxml =
+				#xml:CBOL#
+			</isNotNull>
+			<isNotNull prepend="," property="deploymentID">
+				fdeploymentID =
+				#deploymentID:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="starttype">
+				fstarttype =
+				#starttype:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="starttask">
+				fstarttask =
+				#starttask:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="params">
+				fparams =
+				#params:VARCHAR#
+			</isNotNull>
+			<isNotNull prepend="," property="assigner">
+				fassigner =
+				#assigner:VARCHAR#
+			</isNotNull>
+			where fid=#id:VARCHAR#
+		</dynamic>
+	</update>
+	<insert id="T_BP_Process_BatchInsert" parameterClass="java.util.List">
+		begin
+		<iterate conjunction=";">
+			insert into T_BP_PROCESS (fid,
+			fnumber,
+			fname,
+			faliasName,
+			fcreatetime,fcreator,flastUpdateTime,flastUpdateUser,fstatus,fbillTypeID,fxml,fstarttype,fstarttask,fparams,fassigner
+			)
+			values
+			(#id:VARCHAR#,
+			#number:VARCHAR#,
+			#name:VARCHAR#,
+			#aliasName:VARCHAR#,
+			#createTime:TIMESTAMP#,
+			#creator:VARCHAR#,
+			#lastUpdateTime:TIMESTAMP#,
+			#lastUpdateUser:VARCHAR#,
+			#status:VARCHAR#,
+			#billTypeID:VARCHAR#,
+			#xml:CBOL#,
+			#starttype:VARCHAR#,
+			#starttask:VARCHAR#,
+			#params:VARCHAR#
+			#assigner:VARCHAR#
+			)
+		</iterate>
+		; end;
+	</insert>
+	<!-- 启动流程 -->
+	<update id="T_BP_Process_startByID" parameterClass="java.lang.String">
+	   update t_bp_process set fstatus='2' where fid=#fporcessId#
+	</update>
+	
+	<!-- 停用流程 -->
+	<update id="T_BP_Process_stopByID" parameterClass="java.lang.String">
+	   update t_bp_process set fstatus='1' where fid=#fporcessId#
+	</update>
+	<!-- 删除临时xml -->
+	<delete id="delete_tempXMl">
+	   delete from t_bp_processtempdata where fprocessid=#flcid#
+	</delete>
+</sqlMap>

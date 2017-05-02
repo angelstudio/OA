@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 后勤管理 -->
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+
+	<package name="logistics" extends="struts-default" namespace="/">
+	   <!--资产类型 -->
+		<action name="propertyType" class="com.jdoa.basic.logistics.action.PropertyAction"
+			method="propertyType">
+			<param name="aliasname">资产类型</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!--申购资产列表 -->
+		<action name="propertyData" class="com.jdoa.basic.logistics.action.PropertyAction"
+			method="propertyData">
+			<param name="aliasname">固定资产申购列表</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!--申购资产详情 -->
+		<action name="properDetails" class="com.jdoa.basic.logistics.action.PropertyAction"
+			method="properDetails">
+			<param name="aliasname">固定资产申购详情</param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!--申购资产删除 -->
+		<action name="propertydel" class="com.jdoa.basic.logistics.action.PropertyAction"
+			method="propertydel">
+			<param name="aliasname">固定资产申购删除</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!--申购资产添加或者修改 -->
+		<action name="addOrEditProperty" class="com.jdoa.basic.logistics.action.PropertyAction"
+			method="addOrEditProperty">
+			<param name="aliasname">申购资产添加或者修改</param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 查询办公用品申领 -->
+		<action name="queryAllApply" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="queryAllApply" />
+		<!-- 办公用品申领详情查询 -->
+		<action name="queryApplyDetail" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="queryApplyDetail" />
+
+		<action name="queryPersonalInformation" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="queryPersonalInformation" />
+
+		<action name="searchByName" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="searchByName" />
+
+		<!-- 新增办公用品申领 -->
+		<action name="addOfficeSuppliesFor" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="addOfficeSuppliesFor" />
+		<!-- 办公用品申领删除 -->
+		<action name="deleteOfficeSuppliesFor" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="deleteOfficeSuppliesFor" />
+
+		<!-- 办公用品详情删除 -->
+		<action name="delOfficeSuppliesForDetail" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="delOfficeSuppliesForDetail" />
+
+		<!-- 申领部门模糊查询 -->
+		<action name="fuzzyQuery" class="com.jdoa.basic.logistics.action.ApplyAction"
+			method="fuzzyQuery" />
+
+		<!-- 查询所有申购 -->
+		<action name="queryAllSubscribe" class="com.jdoa.basic.logistics.action.SubscribeAction"
+			method="queryAllSubscribe" />
+
+		<!-- 申购详情查询 -->
+		<action name="queryOfficesTuffPurchaseDetail" class="com.jdoa.basic.logistics.action.SubscribeAction"
+			method="queryOfficesTuffPurchaseDetail" />
+
+		<!-- 新增申购 -->
+		<action name="addOfficeSuppliesPurchase" class="com.jdoa.basic.logistics.action.SubscribeAction"
+			method="addOfficeSuppliesPurchase" />
+
+		<!-- 申购内容模糊查询 -->
+		<action name="fuzzyQuerySubscribe" class="com.jdoa.basic.logistics.action.SubscribeAction"
+			method="fuzzyQuerySubscribe" />
+		<!-- 申购删除 -->
+		<action name="deleteOfficeSuppliesPurchase" class="com.jdoa.basic.logistics.action.SubscribeAction"
+			method="deleteOfficeSuppliesPurchase" />
+
+		<!-- 购置入库查询 -->
+		<action name="queryAll"
+			class="com.jdoa.basic.logistics.action.PurchaseInventoryAction"
+			method="queryAll" />
+
+		<!-- 购置入库增、删、改 -->
+		<action name="addPurchaseInventory"
+			class="com.jdoa.basic.logistics.action.PurchaseInventoryAction"
+			method="addPurchaseInventory" />
+
+		<!-- 模糊查询 -->
+		<action name="fuzzyQueryPurchaseInventory"
+			class="com.jdoa.basic.logistics.action.PurchaseInventoryAction"
+			method="fuzzyQueryPurchaseInventory" />
+
+		<!-- 直接入库查询 -->
+		<action name="queryAllDirectPutAway"
+			class="com.jdoa.basic.logistics.action.DirectPutAwayAction" method="queryAllDirectPutAway" />
+
+		<!-- 直接入库增、删、改 -->
+		<action name="addDirectPutAway"
+			class="com.jdoa.basic.logistics.action.DirectPutAwayAction" method="addDirectPutAway" />
+
+		<!-- 直接入库，模糊查询 -->
+		<action name="fuzzyQueryDirectPutAway"
+			class="com.jdoa.basic.logistics.action.DirectPutAwayAction" method="fuzzyQueryDirectPutAway" />
+
+		<!-- 查询所有出库 -->
+		<action name="queryAllOutbound" class="com.jdoa.basic.logistics.action.OutboundAction"
+			method="queryAllOutbound" />
+
+		<!-- 新增出库 -->
+		<action name="addOutbound" class="com.jdoa.basic.logistics.action.OutboundAction"
+			method="addOutbound" />
+
+		<!-- 出库模糊查询 -->
+		<action name="fuzzyQueryOutbound" class="com.jdoa.basic.logistics.action.OutboundAction"
+			method="fuzzyQueryOutbound" />
+
+		<!-- 库存查询 -->
+		<action name="queryAllInventory" class="com.jdoa.basic.logistics.action.InventoryAction"
+			method="queryAllInventory" />
+
+		<!-- 新增库存 -->
+		<action name="addInventory" class="com.jdoa.basic.logistics.action.InventoryAction"
+			method="addInventory" />
+
+		<!-- 删除库存 -->
+		<action name="deleteInventory" class="com.jdoa.basic.logistics.action.InventoryAction"
+			method="deleteInventory" />
+
+		<!-- 库存模糊查询 -->
+		<action name="fuzzyQueryInventory" class="com.jdoa.basic.logistics.action.InventoryAction"
+			method="fuzzyQueryInventory" />
+
+		<!-- 出入库明细查询 -->
+		<action name="queryAllForTheDetail"
+			class="com.jdoa.basic.logistics.action.ForTheDetailAction" method="queryAllForTheDetail" />
+
+		<!-- 出入库明细模糊查询 -->
+		<action name="fuzzyQueryForTheDetail"
+			class="com.jdoa.basic.logistics.action.ForTheDetailAction" method="fuzzyQueryForTheDetail" />
+
+		<!-- 明细新增、修改 -->
+		<action name="addForTheDetail"
+			class="com.jdoa.basic.logistics.action.ForTheDetailAction" method="addForTheDetail" />
+
+		<!-- 删除明细 -->
+		<action name="deleteForTheDetail"
+			class="com.jdoa.basic.logistics.action.ForTheDetailAction" method="deleteForTheDetail" />
+
+		<!-- 查询我的领用明细 -->
+		<action name="queryAllDetails"
+			class="com.jdoa.basic.logistics.action.MyRecipientsDetailsAction"
+			method="queryAllDetails" />
+
+		<!-- 领用明细新增 -->
+		<action name="addMyRecipientsDetails"
+			class="com.jdoa.basic.logistics.action.MyRecipientsDetailsAction"
+			method="addMyRecipientsDetails" />
+
+		<!-- 领用明细模糊查询 -->
+		<action name="fuzzyQueryDetail"
+			class="com.jdoa.basic.logistics.action.MyRecipientsDetailsAction"
+			method="fuzzyQueryDetail" />
+
+		<!-- 删除领用明细 -->
+		<action name="deleteMyRecipientsDetail"
+			class="com.jdoa.basic.logistics.action.MyRecipientsDetailsAction"
+			method="deleteMyRecipientsDetail" />
+
+		<!-- 出入库汇总查询 -->
+		<action name="queryAllForTheSummary"
+			class="com.jdoa.basic.logistics.action.ForTheSummaryAction" method="queryAllForTheSummary" />
+
+		<!-- 新增出入库汇总 -->
+		<action name="addForTheSummary"
+			class="com.jdoa.basic.logistics.action.ForTheSummaryAction" method="addForTheSummary" />
+
+		<!-- 删除出入库汇总 -->
+		<action name="deleteForTheSummary"
+			class="com.jdoa.basic.logistics.action.ForTheSummaryAction" method="deleteForTheSummary" />
+
+		<!-- 汇总模糊查询 -->
+		<action name="fuzzyQueryForTheSummary"
+			class="com.jdoa.basic.logistics.action.ForTheSummaryAction" method="fuzzyQueryForTheSummary" />
+
+		<!-- 查询个人汇总 -->
+		<action name="queryAllSummaryOfRecipients"
+			class="com.jdoa.basic.logistics.action.SummaryOfRecipientsAction"
+			method="queryAllSummaryOfRecipients" />
+
+		<!-- 个人领用汇总模糊查询 -->
+		<action name="fuzzyQuerySummaryOfRecipients"
+			class="com.jdoa.basic.logistics.action.SummaryOfRecipientsAction"
+			method="fuzzyQuerySummaryOfRecipients" />
+
+		<!-- 新增个人汇总 -->
+		<action name="addSummaryOfRecipients"
+			class="com.jdoa.basic.logistics.action.SummaryOfRecipientsAction"
+			method="addSummaryOfRecipients" />
+
+		<!-- 删除个人汇总 -->
+		<action name="deleteSummaryOfRecipients"
+			class="com.jdoa.basic.logistics.action.SummaryOfRecipientsAction"
+			method="deleteSummaryOfRecipients" />
+
+		<!-- 查询我的办公用品 -->
+		<action name="queryAllMyOfficeSupplies"
+			class="com.jdoa.basic.logistics.action.MyOfficeSuppliesAction"
+			method="queryAllMyOfficeSupplies" />
+
+		<!-- 模糊查询我的办公用品 -->
+		<action name="fuzzyQueryMyOfficeSupplies"
+			class="com.jdoa.basic.logistics.action.MyOfficeSuppliesAction"
+			method="fuzzyQueryMyOfficeSupplies" />
+			
+		<!-- 查询所有办公用品类型 -->	
+		<action name="queryAllOfficeSupplyType"
+			class="com.jdoa.basic.logistics.action.OfficeSupplyTypeAction"
+			method="queryAllOfficeSupplyType" />
+			
+			
+			
+
+
+		<!-- 资产采购合同列表 -->
+		<action name="propertyPactList"
+			class="com.jdoa.basic.logistics.action.PropertyPactAction" method="propertyPactList">
+			<param name="aliasname">资产采购合同列表 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产采购合同添加或者修改 -->
+		<action name="addOrEditpact"
+			class="com.jdoa.basic.logistics.action.PropertyPactAction" method="addOrEditpact">
+			<param name="aliasname">资产采购合同添加或修改 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 资产采购合同删除 -->
+		<action name="deletePact"
+			class="com.jdoa.basic.logistics.action.PropertyPactAction" method="deletePact">
+			<param name="aliasname">资产采购合同删除 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 资产采购列表 -->
+		<action name="purchaseList" class="com.jdoa.basic.logistics.action.PurchaseAction"
+			method="purchaseList">
+			<param name="aliasname">资产采购合同列表 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产采购添加或者修改 -->
+		<action name="addOrEditPurchase" class="com.jdoa.basic.logistics.action.PurchaseAction"
+			method="addOrEditPurchase">
+			<param name="aliasname">资产采购添加或修改 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产采购删除 -->
+		<action name="deletePurchase" class="com.jdoa.basic.logistics.action.PurchaseAction"
+			method="deletePurchase">
+			<param name="aliasname">资产采购删除 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!--资产采购详情 -->
+		<action name="purchaseDetails" class="com.jdoa.basic.logistics.action.PurchaseAction"
+			method="purchaseDetails">
+			<param name="aliasname">资产采购详情</param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 资产验收列表 -->
+		<action name="acceptList" class="com.jdoa.basic.logistics.action.AcceptAction"
+			method="acceptList">
+			<param name="aliasname">资产验收合同列表 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产验收添加或者修改 -->
+		<action name="addOrEditAccept" class="com.jdoa.basic.logistics.action.AcceptAction"
+			method="addOrEditAccept">
+			<param name="aliasname">资产验收添加或修改 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产验收删除 -->
+		<action name="deleteAccept" class="com.jdoa.basic.logistics.action.AcceptAction"
+			method="deleteAccept">
+			<param name="aliasname">资产验收删除 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 查询已审核的采购单 -->
+		<action name="qureypurchase" class="com.jdoa.basic.logistics.action.AcceptAction"
+			method="qureypurchase">
+			<param name="aliasname">查询已审核的采购单 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 查询单个采购信息 -->
+		<action name="qureyonepurchase" class="com.jdoa.basic.logistics.action.AcceptAction"
+			method="qureyonepurchase">
+			<param name="aliasname">查询单个采购信息 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 资产领用列表 -->
+		<action name="receiveList" class="com.jdoa.basic.logistics.action.ReceiveAction"
+			method="receiveList">
+			<param name="aliasname">资产领用列表  </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产领用添加或者修改 -->
+		<action name="addOrEditReceive" class="com.jdoa.basic.logistics.action.ReceiveAction"
+			method="addOrEditReceive">
+			<param name="aliasname">资产领用添加或者修改</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产领用查询 -->
+		<action name="queryReceive" class="com.jdoa.basic.logistics.action.ReceiveAction"
+			method="queryReceive">
+			<param name="aliasname"> 资产领用查询 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产领用删除 -->
+		<action name="deleteReceive" class="com.jdoa.basic.logistics.action.ReceiveAction"
+			method="deleteReceive">
+			<param name="aliasname"> 资产领用删除 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!--资产领用详情 -->
+		<action name="ReceiveDetails" class="com.jdoa.basic.logistics.action.ReceiveAction"
+			method="ReceiveDetails">
+			<param name="aliasname">资产领用详情</param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 资产调拨列表 -->
+		<action name="allotList" class="com.jdoa.basic.logistics.action.AllotAction"
+			method="allotList">
+			<param name="aliasname">资产调拨列表   </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产调拨添加或者修改 -->
+		<action name="addOrEditAllot" class="com.jdoa.basic.logistics.action.AllotAction"
+			method="addOrEditAllot">
+			<param name="aliasname">资产调拨添加或者修改</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产调拨删除 -->
+		<action name="deleteAllot" class="com.jdoa.basic.logistics.action.AllotAction"
+			method="deleteAllot">
+			<param name="aliasname"> 资产调拨删除 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!--资产调拨详情 -->
+		<action name="AllotDetails" class="com.jdoa.basic.logistics.action.AllotAction"
+			method="AllotDetails">
+			<param name="aliasname">资产调拨详情</param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 资产仓库列表 -->
+		<action name="warehouseList" class="com.jdoa.basic.logistics.action.WarehouseAction"
+			method="warehouseList">
+			<param name="aliasname">资产仓库列表  </param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<!-- 资产仓库添加或者修改 -->
+		<action name="addOrEditwarehouse" class="com.jdoa.basic.logistics.action.WarehouseAction"
+			method="addOrEditwarehouse">
+			<param name="aliasname">资产仓库添加或修改 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 资产仓库删除 -->
+		<action name="deleteWarehouse" class="com.jdoa.basic.logistics.action.WarehouseAction"
+			method="deleteWarehouse">
+			<param name="aliasname">资产仓库删除 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+
+		<!-- 我的资产 -->
+		<action name="myProperty" class="com.jdoa.basic.logistics.action.MyPropertyAction"
+			method="myProperty">
+			<param name="aliasname">我的资产 </param>
+			<param name="authoritytype">-1</param>
+		</action>
+	</package>
+
+</struts>

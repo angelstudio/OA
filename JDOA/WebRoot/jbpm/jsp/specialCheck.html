@@ -1,0 +1,171 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>流程设计器</title>
+		<style type="text/css">
+v\:* {
+	BEHAVIOR: url(#default#VML)
+}
+</style>
+		<link rel="stylesheet" type="text/css" href="../css/ext2/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="../css/design.css" />
+
+		<script type="text/javascript" src="../css/ext2/ext-base.js"></script>
+		<script type="text/javascript" src="../css/ext2/ext-all.js"></script>
+		<script type="text/javascript" src="../js/checkOut.js"></script>
+		<script type="text/javascript" src="../../js/tool/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/json2.js"></script>
+		<script type="text/javascript" src="../../js/tool//urlUtil.js"></script>
+		 <script type="text/javascript" src="../../js/tool/operamasks-ui.min.js"></script>
+		 
+		 <link rel="stylesheet" type="text/css" href="../../css/tool/ui/default/om-default.css" />
+	     <link rel="stylesheet" type="text/css" href="../../css/tool/ui/main.css" />
+	     <link rel="stylesheet" type="text/css" href="../../css/mycss.css" />
+		<script>
+		var defualtHeight;
+		var current;
+		var image_path;
+		Ext.onReady(function() {
+			defualtHeight=250;
+		
+			 $('#body').omBorderLayout({ 
+		           	   panels:[{
+		           	        id:"center-panel",
+		           	     	header:false,
+		           	        region:"center"
+		           	        ,fit:true
+		           	    },{
+		           	        id:"south-panel",
+		           	        resizable:true,
+		           	        collapsible:false,
+		           	        region:"south",
+		           	        width:defualtHeight
+		           	    }]
+	            });
+		
+			//使fireFox也支持xmlDom.xml 
+			if (!document.all) { 
+				Node.prototype.__defineGetter__("xml", function () { 
+					return (new XMLSerializer).serializeToString(this); 
+				});
+			}
+			init();
+			var fid=request('id');
+			var fexecutionId=request('fexecutionId');
+			
+			
+			//加载审核信息
+			$('#grid').omGrid({
+	                width:'100%',
+	                height:defualtHeight-100,
+	                limit:3,
+	                dataSource : 'selectProcessStatusData?fid='+fid+'&fexecutionId='+fexecutionId,
+	                colModel : [ {header : '操作人', name : 'operator', width :  120, align : 'center'}, 
+	                             {header : '时间', name : 'opertime', width :  150, align : 'left'},
+	                             {header : '审批结果', name : 'result', width : 150, align : 'left'},
+	                             {header : '审批建议', name : 'fauditidea', align : 'left', width : 300} ]
+	            });
+	        getCompletedNodeId(fid,fexecutionId);
+	});
+	
+	
+
+	////1、首先获得此流程中完成的情况
+	function getCompletedNodeId(fid,fexecutionId){
+		Ext.Ajax.request({
+				// 被用来向服务器发起请求默认的url
+				url : "selectCompletedNodeFromProcess.action",
+				async : false,
+				params : {
+					fid : fid,
+					fexecutionId:fexecutionId
+				},
+				// 请求时使用的默认的http方法
+				method : "post",
+				// 请求成功时回调函数
+				success : function(response, options) {
+					var json = eval("(" + response.responseText + ")");
+					ids = json["completedNode"];
+					currentNodeId=json["currentNode"];
+					var changeFlag=json["changeFlag"];
+					xmlDataFromData(fid,fexecutionId,changeFlag);
+				},
+				// 请求失败时
+				failure : function(response, options) {
+					Ext.MessageBox.alert("失败","取数失败" + response.status);
+				}
+			});
+		
+	}
+	
+	//2、获得此流程中的xml文件信息
+	function xmlDataFromData(fid,fexecutionId,changeFlag) {
+		Ext.Ajax.request({
+				// 被用来向服务器发起请求默认的url
+				url : "selectXmlFromProcess.action",
+				async : false,
+				params : {
+					fid : fid,
+					fexecutionId:fexecutionId
+				},
+				// 请求时使用的默认的http方法
+				method : "post",
+				// 请求成功时回调函数
+				success : function(response, options) {
+					//xml.loadXML(response.responseText);//加载成xml对象
+					//火狐加载xml
+					var parser = new DOMParser(); 
+					xml = parser.parseFromString(response.responseText, "text/xml"); 
+					
+					changeXmlToSvg(changeFlag);
+					changeXmlTransitionToSvg(changeFlag);
+					
+					//alert(defualtHeight+"-----------"+max_x+"------"+max_y);
+					//根据最大x、y坐标设置平台需要的宽度
+					//设置div的宽度
+					$('#center-panel').css('height',screen.height-defualtHeight);
+					if((max_y*1+100)>(screen.height-defualtHeight)){
+						$('#context').css('height',max_y*1+100);
+					}else{
+						$('#context').css('height',screen.height-defualtHeight);
+					}
+					$('#context').css("width",max_x*1+200);
+					
+					//3、对生成的svgXml文件进行替换
+					document.getElementById('context').innerHTML=getSvgXml();
+					
+					//获取获取当前节点信息
+					current=$('image[flag=true]')[0];
+					image_path=current.getAttribute('xlink:href');
+					Setlinkblink();
+					
+				},
+				// 请求失败时
+				failure : function(response, options) {
+					Ext.MessageBox.alert("失败","获取xml失败" + response.status);
+				}
+			});
+	}
+	
+	//设置当前节点闪烁
+	function Setlinkblink(){
+      if (current.getAttribute('xlink:href')!= ""){
+    	  current.setAttribute('xlink:href','');
+      }else {
+          current.setAttribute('xlink:href',image_path);
+      }
+       setTimeout("Setlinkblink()", 800);
+}
+	
+	
+</script>
+	</head>
+	<body style="width:100%;height:100%;">
+		<div id="center-panel" style=" padding: 0; margin: 0;overflow-x:scroll;overflow-y:scroll;">
+			<div id="context"></div>
+   	    </div>
+		<div id="south-panel" >
+	    	<table id="grid"></table>
+    	</div>
+	</body>
+</html>

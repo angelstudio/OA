@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	
+	<!-- 编码 -->
+	<package name="jdoa" extends="struts-default" namespace="/">
+		<interceptors>
+			<!--定义一个名为authority的拦截器 -->
+			<interceptor class="com.jdoa.tool.AuthorityInterceptor"
+				name="authority" />
+			<!--定义一个包含权限检查的拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<!--配置内建默认拦截器 -->
+				<interceptor-ref name="defaultStack" />
+				<!--配置自定义的拦截器 -->
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mydefault" />
+
+	</package>
+</struts>

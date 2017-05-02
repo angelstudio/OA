@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ERPCLOUD_T_SYS_USER">
+
+	<typeAlias alias="tSysUser" type="com.jdoa.basic.login.model.TSysUser" />
+	<resultMap id="tSysUserResultMap" class="tSysUser">
+		<result column="FID" property="fid" jdbcType="VARCHAR" />
+		<result column="FUSERNAME" property="fusername" jdbcType="VARCHAR" />
+		<result column="FPASSWORD" property="fpassword" jdbcType="VARCHAR" />
+		<result column="FSTATUS" property="fstatus" jdbcType="number" />
+		<result column="FUSERTYPE" property="fusertype" jdbcType="number" />
+		<result column="FPERSONID" property="fpersonid" jdbcType="VARCHAR" />
+		<result column="FMAINURL" property="fmainUrl" jdbcType="VARCHAR" />
+		<result column="fpersonid" property="person" select="getPerson" jdbcType="VARCHAR" />
+	</resultMap>
+	
+   <resultMap class="com.jdoa.basic.person.model.Person" id="person">
+       <result property="fid" column="fid" jdbcType="VARCHAR"/>
+       <result property="fname" column="fname" jdbcType="VARCHAR"/>
+       <result property="fsfzhm" column="fsfzhm" jdbcType="VARCHAR"/>
+       <result property="fssbm" column="fssbm" jdbcType="VARCHAR"/>
+       <result property="fbmid" column="fbmid" jdbcType="VARCHAR"/>
+    </resultMap>
+
+	<select id="searchSysUser" resultClass="tSysUser"
+		parameterClass="tSysUser">
+		select * from T_SYS_USER
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="fusername">
+				fusername like
+				'%$fusername$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="frealname">
+				frealname like
+				'%$frealname$%'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="sysUserValid" resultMap="tSysUserResultMap"
+		parameterClass="tSysUser">
+		select * from T_SYS_USER
+		where FUSERNAME = #fusername# and FPASSWORD =
+		#fpassword#
+	</select>
+
+
+	<select id="findAllSystemUsers" resultMap="tSysUserResultMap">
+		select * from T_SYS_USER
+	</select>
+
+	<select id="findSystemUsersByID" resultMap="tSysUserResultMap"
+		parameterClass="java.lang.String">
+		select * from T_SYS_USER where fid=#fid#
+	</select>
+
+	<select id="findUserByUserName" resultMap="tSysUserResultMap"
+		parameterClass="java.lang.String">
+		select * from T_SYS_USER where FUSERNAME = #fusername#
+	</select>
+    
+     <select id="getPerson" resultMap="person">
+       select fid,fname,fsfzhm,fssbm,fbmid from T_PERSON where fid=#value#
+    </select>
+	<update id="updateSysUserPassword" parameterClass="tSysUser">
+		UPDATE
+		T_SYS_USER SET
+		FPASSWORD=#fpassword:VARCHAR#
+		WHERE FID=#fid:VARCHAR#
+	</update> 
+
+	<update id="updateSysUser" parameterClass="tSysUser">
+		UPDATE T_SYS_USER SET
+		FUSERNAME=#fusername:VARCHAR#,
+		FSTATUS=#fstatus:VARCHAR#,
+		FUSERTYPE=#fusertype:VARCHAR#,
+		FPERSONID=#fpersonid:VARCHAR#,
+		fmainUrl=#fmainUrl:VARCHAR#
+		WHERE FID=#fid:VARCHAR#
+	</update>
+
+	<insert id="insertSysUser" parameterClass="tSysUser">
+		INSERT INTO T_SYS_USER
+		(FID,FUSERNAME,FPASSWORD,FSTATUS,
+		FUSERTYPE,FPERSONID,fmainUrl
+		)
+		VALUES
+		(#fid#,#fusername#,#fpassword#,#fstatus#,
+		#fusertype#,#fpersonid#,#fmainUrl#)
+	</insert>
+
+	<delete id="deleteSysUser" parameterClass="String">
+		DELETE FROM T_SYS_USER
+		WHERE FID =#fid#
+	</delete>
+
+</sqlMap>

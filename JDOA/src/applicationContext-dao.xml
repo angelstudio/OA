@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!--
+	  <bean id="authorityACLDAO"
+		class="com.hnbp.cloud.admin.dao.AuthorityACLDAOImpl">
+		<constructor-arg index="0">
+			<ref bean="sqlMapClient" />
+		</constructor-arg>
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+
+	<bean id="tBillFieldQueryDAO" class="com.hnbp.cloud.admin.schedule.dao.TBillFieldQueryDAOImpl">
+		<constructor-arg index="0">
+			<ref bean="sqlMapClient" />
+		</constructor-arg>
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	-->
+	<!-- jbpm -->
+	<bean id="jbpmDaoImpl" class="com.jdoa.jbpm.dao.JBPMDaoImpl">
+	   <property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	 <bean id="menuDaoImpl"  class="com.jdoa.basic.menu.dao.MenuDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	 <bean id="orgDao"  class="com.jdoa.basic.org.dao.OrgDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	<bean id="tSysUserDAO" class="com.jdoa.basic.login.dao.TSysUserDAOImpl">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	<!-- 初始化jdbcutil -->	
+	<bean id="jdbcUtil" class="com.jdoa.tool.JDBCUtil">
+		<property name="sqlMap" ref="sqlMapClient"></property>
+	</bean>
+	
+</beans>

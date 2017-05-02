@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="ERPCLOUD_T_MENU" >
+  <resultMap id="abatorgenerated_TMenuResult" class="com.jdoa.basic.menu.model.TMenu" >
+    <result column="FID" property="fid" jdbcType="VARCHAR" />
+    <result column="FNAME" property="fname" jdbcType="VARCHAR" />
+    <result column="FPARENTID" property="fparentid" jdbcType="VARCHAR" />
+    <result column="FLEVEL" property="flevel" jdbcType="number" />
+    <result column="FURL" property="furl" jdbcType="VARCHAR" />
+    <result column="FLONGNUMBER" property="flongNumber" jdbcType="VARCHAR" />
+    <result column="FSEQ" property="fseq" jdbcType="number" />
+  </resultMap>
+  <select id="queryAllMenu" resultMap="abatorgenerated_TMenuResult">
+    select fid,fname,fparentid,flevel,furl,flongNumber,fseq from t_menu order by fseq 
+  </select>
+    <select id="ERPCLOUD_T_MENU.findAllEnableLongNumbersByUserId" parameterClass="String" resultClass="String">
+      select fmenuid from T_MENUROLEACL where froleid in(select froleid from t_user_role where fuserid =#value#)
+       union all 
+       select fmenuid from T_MENUUSERACL where fuserid =#value#
+  </select>
+   <select id="ERPCLOUD_T_MENU_findCacheMenu" resultMap="abatorgenerated_TMenuResult" parameterClass="java.util.List">
+    select fid,fname,fparentid,flevel,furl,flongNumber,fseq from t_menu  
+    <dynamic prepend="where  fid  in">    
+         <iterate open="(" close=")" conjunction=",">    
+         #[]#    
+         </iterate>    
+         </dynamic>
+     order by fseq 
+  </select>
+</sqlMap>

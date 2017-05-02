@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,td,th { font-size: 12px; }
+body,from {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.clear{clear:both;}
+/*全局链接样式*/
+a:link{color:#000000; text-decoration: none}
+a:visited {color:#000000;text-decoration: none}
+a:hover {color:red; text-decoration:underline;}
+a:active {color:#000000;text-decoration: none}
+
+.blue{}
+.blue a:link{color:#07456c; text-decoration: none}
+.blue a:visited {color:#07456c;text-decoration: none}
+.blue a:hover {color:red; text-decoration:underline;}
+.blue a:active {color:#07456c;text-decoration: none}
+
+.head{ background-image:url(/images/userheadbg.gif)}
+.head_left{ float:left; height:64px; line-height:64px; padding-left:15px; font-size:14px; font-weight:bold; color:#FFFFFF;}
+.head_right{ float:right;}
+.head2{ background-image:url(/images/headbg2.gif); height:27px;}
+.bottom2{ background-image:url(/images/bottom2bg.gif); height:27px; line-height:27px; text-align:center; color:#07456c;}
+.bottom{ background-image:url(/images/bottombg.gif); height:43px; color:#07456c; line-height:43px; text-align:center;}
+
+.login{ color:#0065b3;}
+.listStyle{border-bottom:solid 1px #c3c3c3;border-top:solid 1px #c3c3c3;border-left:solid 1px #c3c3c3;}
+.listStyle td{border-right:solid 1px #c3c3c3;}
+
+.fontRed{ color:red;}

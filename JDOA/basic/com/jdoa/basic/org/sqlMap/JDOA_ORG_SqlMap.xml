@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="JDOA_ORG" >
+  <resultMap id="Basic_ORG" class="com.jdoa.baisc.org.model.Organization" >
+    <result column="FID" property="fid" jdbcType="VARCHAR" />
+    <result column="FNAME" property="fname" jdbcType="VARCHAR" />
+    <result column="FPARENTID" property="fparentId" jdbcType="VARCHAR" />
+    <result column="FLEVEL" property="flevel" jdbcType="number" />
+    <result column="FLONGNUMBER" property="flongNumber" jdbcType="VARCHAR" />
+    <result column="FSEQ" property="fseq" jdbcType="number" />
+  </resultMap>
+  <select id="queryAllOrg" resultMap="Basic_ORG">
+    select fid,fname,fparentid,flevel,flongNumber,fseq from T_ORG order by fseq 
+  </select>
+  <insert id="OrgAction_addOrg" parameterClass="com.jdoa.baisc.org.model.Organization">
+     insert into T_ORG(fid,fname,fparentid,flevel,flongNumber,fseq) values(
+      #fid#,#fname#,#fparentId#,#flevel#,#flongNumber#,#fseq#
+     )
+     
+  </insert>
+  <update id="OrgAction_editOrg" parameterClass="com.jdoa.baisc.org.model.Organization">
+      update T_ORG set fname=#fname#,fseq=#fseq# where fid=#fid#
+  </update>
+  <delete id="OrgAction_delOrg" parameterClass="java.lang.String">
+      delete from T_ORG where fid=#fid#
+  </delete>
+</sqlMap>

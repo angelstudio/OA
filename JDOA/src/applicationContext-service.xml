@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- 
+	<bean id="sysAuthorityACLService"  
+		class="com.hnbp.cloud.admin.service.SysAuthorityACLService">
+		<property name="authorityACLDAO" ref="authorityACLDAO"></property>
+	</bean>
+    -->
+    <!-- jbpm -->
+    <bean id="jbpmServiceImpl" class="com.jdoa.jbpm.service.JBPMServiceImpl">
+       <property name="jbpmDaoImpl" ref="jbpmDaoImpl"></property>
+    </bean>
+    <bean id="menuServiceImpl"  class="com.jdoa.basic.menu.service.MenuServiceImpl">
+		<property name="menuDaoImpl" ref="menuDaoImpl"></property>
+	</bean>
+	 <bean id="orgService"  class="com.jdoa.basic.org.service.OrgServiceImpl">
+		<property name="orgDao" ref="orgDao"></property>
+	</bean>
+	 <bean id="sysUserService" class="com.jdoa.basic.login.service.SysUserService">
+		<property name="TSysUserDAO" ref="tSysUserDAO"></property>
+	</bean>
+	 
+</beans>

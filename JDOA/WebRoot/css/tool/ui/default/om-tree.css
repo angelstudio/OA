@@ -1,0 +1,158 @@
+/*
+ * $Id: om-tree.css,v 1.1 2017/03/03 08:59:56 taotao_xu Exp $
+ * operamasks-ui tree @VERSION
+ *
+ * Copyright 2011, AUTHORS.txt (http://ui.operamasks.org/about)
+ * Dual licensed under the MIT or LGPL Version 2 licenses.
+ * http://ui.operamasks.org/license
+ *
+ * http://ui.operamasks.org/docs/
+ */
+ html, body {font-family: "Arial","Helvetica","Verdana","sans-serif"; font-size : 12px; margin: 0;padding: 0}
+.om-tree, .om-tree ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.om-tree ul {
+	margin-left: 19px;
+}
+.om-tree .hitarea {
+	visibility:hidden
+}
+/* fix for IE6 */
+* html .hitarea {
+	visibility:hidden
+}
+.om-tree li {
+}
+.om-tree li.om-tree-node {
+	white-space: nowrap;
+}
+.om-tree li span {
+	display: inline-block;
+ *overflow: hidden;
+}
+.om-tree .om-tree-node a:link {
+	color: black;
+	text-decoration: none;
+}
+.om-tree .om-tree-node a:visited {
+	color: black;
+	text-decoration: none;
+}
+#treecontrol {
+	margin: 1em 0;
+	display: none;
+}
+.om-tree .om-tree-node span.hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+.om-tree li {
+	zoom:1;
+}
+.om-tree li.collapsable, .om-tree li.expandable {
+	background-position: 0 -176px;
+}
+.om-tree .expandable-hitarea {
+	background-position: -80px -3px;
+}
+.om-tree li.last {
+	background-position: 0 -1766px
+}
+.om-tree li.lastCollapsable, .om-tree li.lastExpandable {
+	background-image: url(images/tree/treeview-default.gif);
+}
+.om-tree li.lastCollapsable {
+	background-position: 0 -111px
+}
+.om-tree li.lastExpandable {
+	background-position: -32px -67px
+}
+.om-tree div.lastCollapsable-hitarea, .om-tree div.lastExpandable-hitarea {
+	background-position: 0;
+}
+.om-tree .placeholder {
+	background: url(images/tree/tree-loading.gif) 0 0 no-repeat;
+	display: block;
+	padding: 1px 0 1px 16px;
+}
+.om-tree span.folder, .om-tree span.file {
+}
+.om-tree span.folder {
+}
+.om-tree li.expandable span.folder {
+}
+.om-tree span.file {
+}
+.om-tree ul li span.file {
+}
+.om-tree .tree-checkbox {
+	background: url(images/tree/checkbox.png) 0 0 no-repeat;
+	width: 13px;
+	height:13px;
+	_overflow:hidden;
+	float:left;
+	cursor: pointer;
+	padding-right: 3px;
+	margin-top: 2px;
+}
+.om-tree .checkbox_full {
+	background-position:0px -36px;
+}
+.om-tree .checkbox_part {
+	background-position:0px -48px;
+}
+/* 
+.om-tree li.treenode-checkable span.file, .om-tree li.treenode-checkable span.folder {
+    margin-left: 16px;
+}
+*/
+.om-tree li.treenode-droppable {
+	border-bottom: 1px dotted #dd0000;
+}
+/* when we want to use the line hover we may use this style, we can see the style use in the om-tree.js line 435 */
+/* 
+.om-tree li.om-tree-node .selection {display: none;}
+.om-tree li.hover .selection { display: block; background-color: #D4D4D4; }
+.om-tree li.selected .selection { display: block; background-color: #eaf1fb; }
+.selection { height: 17px; position: absolute; left: 0; right: 0; z-index: -1; width: 100%;}
+*/
+
+
+
+/*add by Wu Wenyi
+2013-9-1*/
+
+.FirstLayer {
+	width:239px;
+	height:18px;
+	margin:0px;
+	padding: 10px;
+	background:url(images/tree/Item1_BG.png) no-repeat
+}
+.SecondLayer {
+	width:239px;
+	height:13px;
+	margin:0px;
+	padding: 10px;
+	background:url(images/tree/Item2_BG.png) no-repeat;
+}
+.ThirdLayer {
+	margin-left:10px;
+	width:220px;
+	padding: 10px;
+	height:auto;
+	background:url(images/tree/Item3_BG.png) no-repeat;
+}
+.FirstLayer.selected{
+	background:url(images/tree/Item1_BG_Select.png) no-repeat;
+}
+.FirstLayer.select a:link{color:#fff;}
+.SecondLayer.selected{
+	background:url(images/tree/Item2_BG_Select.png) no-repeat;
+}
+.ThirdLayer.selected{
+	background:url(images/tree/Item3_BG_Select.png) no-repeat;
+}

@@ -1,0 +1,24 @@
+.toolbar-float{position: fixed; _position: absolute; top:0px;}
+ 
+.om-grid div.bDiv tr.redRow {
+  		background-color: red;
+}
+
+
+.om-grid div.bDiv tr.lightOrangeRow {
+  		background-color: #FF9933;
+}
+
+.om-grid div.bDiv tr.greenRow {
+  		background-color: green;
+}
+
+.om-grid div.bDiv tr.buleRow {
+  		background-color: #CCEEFF;
+}
+
+.om-grid div.bDiv tr.wathetRow {
+  		background-color: #E8EEF7;
+}
+
+

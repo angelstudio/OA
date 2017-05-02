@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<constant name="struts.multipart.maxSize" value="52428800" /><!-- 50兆 -->
+	<!-- 发文管理模块 -->
+	<package name="fwgl" extends="struts-default" namespace="/">
+		
+		<action name="addOneDispatch" class="com.jdoa.basic.gwgl.action.DispatchAction" method="addOneDispatch">
+			<param name="aliasname">增加一条发文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		
+		<action name="delOneDispatch" class="com.jdoa.basic.gwgl.action.DispatchAction" method="delOneDispatch">
+			<param name="aliasname">删除一条发文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		
+		<action name="updOneDispatch" class="com.jdoa.basic.gwgl.action.DispatchAction" method="updOneDispatch">
+			<param name="aliasname">更新一条发文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		
+		<action name="findAllDispatchesToGrid" class="com.jdoa.basic.gwgl.action.DispatchAction" method="findAllDispatchesToGrid">
+			<param name="aliasname">加载所有发文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		
+		<action name="queryDispatchesToGrid" class="com.jdoa.basic.gwgl.action.DispatchAction" method="queryDispatchesToGrid">
+			<param name="aliasname">根据条件查询发文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		
+		<action name="queryDispatchDetail" class="com.jdoa.basic.gwgl.action.DispatchAction" method="queryDispatchDetail">
+			<param name="aliasname">查询发文详情</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		
+		<action name="downloadDispatchFile" class="com.jdoa.basic.gwgl.action.DispatchAction" method="downloadFile">
+			<param name="aliasname">下载附件</param>
+			<param name="authoritytype">-1</param>
+			<result type="stream">
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileFileName}</param>
+				<param name="contentType">application/octet-stream</param>
+			</result>
+		</action>
+		
+		<action name="delOneDispatchFile" class="com.jdoa.basic.gwgl.action.DispatchAction" method="delOneDispatchFile">
+			<param name="aliasname">删除一个附件</param>
+			<param name="authoritytype">-1</param>
+		</action>
+	</package>
+	
+	<!-- 收文管理模块 -->
+	<package name="swgl" extends="struts-default" namespace="/">
+		<action name="addOneIncomeDispatch" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="addOneIncomeDispatch">
+			<param name="aliasname">增加一条收文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="delOneIncomeDispatch" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="delOneIncomeDispatch">
+			<param name="aliasname">删除一条收文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="updOneIncomeDispatch" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="updOneIncomeDispatch">
+			<param name="aliasname">更新一条收文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="findAllIncomeDispatchesToGrid" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="findAllIncomeDispatchesToGrid">
+			<param name="aliasname">加载所有收文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryIncomeDispatchesToGrid" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="queryIncomeDispatchesToGrid">
+			<param name="aliasname">根据条件查询收文信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="getOneIncomDispatchByFid" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="getOneIncomDispatchByFid">
+			<param name="aliasname">根据fid获取一条记录</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="downloadIncomeDispatchFile" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="downloadFile">
+			<param name="aliasname">下载附件</param>
+			<param name="authoritytype">-1</param>
+			<result type="stream">
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileFileName}</param>
+				<param name="contentType">application/octet-stream</param>
+			</result>
+		</action>
+		<action name="delOneIncomeDispatchFile" class="com.jdoa.basic.gwgl.action.IncomeDispatchAction" method="delOneDispatchFile">
+			<param name="aliasname">删除一个附件</param>
+			<param name="authoritytype">-1</param>
+		</action>
+	</package>
+	<!-- 资料库模块 -->
+	<package name="database" namespace="/" extends="struts-default">
+		<action name="queryAllFolder" class="com.jdoa.basic.gwgl.action.DatabaseFolderAction" method="queryAllFolder">
+			<param name="aliasname">获取所有文件夹</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="addFileFolder" class="com.jdoa.basic.gwgl.action.DatabaseFolderAction" method="addFileFolder">
+			<param name="aliasname">添加文件夹</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="updFileFolder" class="com.jdoa.basic.gwgl.action.DatabaseFolderAction" method="updFileFolder">
+			<param name="aliasname">更新文件夹</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="delFileFolder" class="com.jdoa.basic.gwgl.action.DatabaseFolderAction" method="delFileFolder">
+			<param name="aliasname">删除文件夹</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="uploadfile" class="com.jdoa.basic.gwgl.action.DatabaseAction" method="uploadFile">
+			<param name="aliasname">上传文件夹或文件</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="downloadFile" class="com.jdoa.basic.gwgl.action.DatabaseAction" method="downloadFile">
+			<param name="aliasname">下载文件</param>
+			<param name="authoritytype">-1</param>
+			<result type="stream">
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileFileName}</param>
+				<param name="contentType">application/octet-stream</param>
+			</result>
+		</action>
+		<action name="findFileInfo" class="com.jdoa.basic.gwgl.action.DatabaseAction" method="findFileInfo">
+			<param name="aliasname">查询所有文件详情</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="delOneFile" class="com.jdoa.basic.gwgl.action.DatabaseAction" method="delOneFile">
+			<param name="aliasname">删除文件</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="findOneFile" class="com.jdoa.basic.gwgl.action.DatabaseAction" method="findOneFile">
+			<param name="aliasname">查询一个文件</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="updOneFile" class="com.jdoa.basic.gwgl.action.DatabaseAction" method="updOneFile">
+			<param name="aliasname">更新一个文件</param>
+			<param name="authoritytype">-1</param>
+		</action>
+		<action name="queryFileInfoToGrid" class="com.jdoa.basic.gwgl.action.DatabaseAction" method="queryFileInfoToGrid">
+			<param name="aliasname">根据条件查询文件信息</param>
+			<param name="authoritytype">-1</param>
+		</action>
+	</package>
+</struts>

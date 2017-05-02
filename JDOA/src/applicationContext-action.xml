@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<!-- 
+    <bean id="applicationContextUtil" class="com.hnbp.cloud.util.ApplicationContextUtil">
+	</bean>
+	
+    <bean id="menuacl" class="com.hnbp.cloud.admin.action.MenuACLAction">
+        <property name="sysMenuACLService" ref="sysMenuACLService"></property>
+        <property name="TMenuService" ref="tMenuService"></property>
+	</bean>
+	
+	 <bean id="sysOrg" class="com.hnbp.cloud.admin.action.OrgAction">
+         <property name="sysOrgService" ref="sysOrgService"></property>
+	</bean>
+	 -->
+	 <!-- jbpm -->
+	 <bean id="springHelper" class="org.jbpm.pvm.internal.processengine.SpringHelper">
+		<property name="jbpmCfg" value="jbpm.cfg.xml"></property>
+	</bean>
+	<bean id="processEngine" factory-bean="springHelper"
+		factory-method="createProcessEngine" />
+    <bean id="queryAction" class="com.jdoa.jbpm.action.QueryAction" >
+	</bean>
+	<bean id="jbpmAction" class="com.jdoa.jbpm.action.JBPMAction" >
+	   <property name="jbpmServiceImpl" ref="jbpmServiceImpl"></property>
+	</bean>
+	<bean id="processListen" class="com.jdoa.jbpm.action.ProcessListen">
+		<property name="processEngine" ref="processEngine"></property>
+	</bean>
+	<bean id="jbpmMethod" class="com.jdoa.jbpm.action.JBPMMethod">
+	</bean>
+	<bean id="formAction" class="com.jdoa.jbpm.action.FormAction">
+	</bean>
+	<!-- 登录 -->
+	 <bean id="loginAction" class="com.jdoa.basic.login.action.LoginAction" >
+   	   <property name="sysUserService" ref="sysUserService"></property>
+   	   <property name="menuServiceImpl" ref="menuServiceImpl"></property>
+	</bean>
+	<bean id="mainAction" class="com.jdoa.basic.login.action.MainAction" >
+	</bean>
+	<bean id="menuAction" class="com.jdoa.basic.menu.action.MenuAction" >
+	  <property name="menuServiceImpl" ref="menuServiceImpl"></property>
+	</bean>
+	<!--组织架构  -->
+	<bean id="orgAction" class="com.jdoa.basic.org.action.OrgAction" >
+	  <property name="orgService" ref="orgService"></property>
+	</bean>
+	<!-- 人员信息 -->
+	<bean id="personAction" class="com.jdoa.basic.person.action.PersonAction" >
+	</bean>
+	<!-- 资产申购 -->
+	<bean id="propertyAction" class="com.jdoa.basic.logistics.action.PropertyAction" >
+	</bean>
+
+</beans>

@@ -1,0 +1,322 @@
+/*总体样式*/
+
+html, body,div,span,p,font,a,ul,li,button,input{
+	margin: 0; 
+	padding: 0;
+}
+body {
+	font-family: "微软雅黑";
+	font-size: 12px;
+	max-width: 100%; 
+	min-height: 100%;
+	overflow-x: hidden;
+}
+ul,li{
+	list-style-type:none;
+}
+.fll{
+	float: left;
+}
+.flr{
+	float: right;
+}
+.clr{
+	clear: both;
+}
+/*页面样式*/
+.head{
+	width: 100%;
+	height: 120px;
+	position: relative;
+	background-color: #f0f0f0;
+	z-index: 0;
+}
+.logo{
+	width: 303px;
+	height: 83px;
+	background: url(../../image/login/logo.png) no-repeat center;
+	float: left;
+	position: absolute;
+	left: 100px;
+	bottom: 10px;
+	background-size: 100%;
+}
+.head-by{
+	float: right;
+	position: absolute;
+	right: 100px;
+	bottom: 10px;
+}
+.head-by li{
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+	color: #999;
+	border-right: 2px solid #999;
+}
+.head-by li:hover{
+	color: #333;
+}
+.sectionA{
+	width: 100%;
+	height: 600px;
+	background: url(../../image/login/cbgImg.png) no-repeat center;
+	position: relative;
+	z-index: 0;
+}
+.login-stn{
+	width: 800px;
+	height: 380px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	position: absolute;
+	top: 70px;
+	right: 120px;
+	z-index: 0;
+	box-shadow: 1px 1px 14px #0a2861;
+}
+.login-lt{
+	width: 399px;
+	height: 380px;
+	float: left;
+	position: relative;
+}
+.lt_imgst{
+	display: block;
+	width: 296px;
+	height: 296px;
+	position: absolute;
+	top: 42px;
+	left: 51.5px;
+}
+.login-bdr{
+	width: 1px;
+	height: 380px;
+	background: url(../../image/login/bdr.png) no-repeat center;
+	float: left;
+}
+.login-rt{
+	width: 400px;
+	height: 380px;
+	float: left;
+}
+.login-rt h2{
+	text-align: center; 
+	color: #2079df; 
+	font-size: 1.4em; 
+	width: 100%; 
+	margin: 20px 0; 
+	position: relative; 
+	line-height: 42px; 
+	font-weight: 400;
+}
+.login-rt h2:before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	width: 68px;
+	height: 2px;
+	background-color: #2079df;
+	margin-left: -34px;
+}
+.login-rt :focus {
+	outline: none;
+}
+
+.login-rt .col-3 {
+	width: 70%;
+	position: relative;
+	left: 15%;
+	margin: 40px 0;
+}
+input[type="text"],input[type="password"]{
+	font: 12px/24px "Lato", Arial, sans-serif;
+	color: #333;
+	width: 100%;
+	box-sizing: border-box;
+	letter-spacing: 1px;
+}
+.subtn{
+	width: 100%;
+	border: 0;
+	height: 40px;
+	background: #3399FF;
+	border-radius: 8px;
+	color: #fafafa;
+	font-size: 1.3em;
+	font-weight: 600;
+	cursor: pointer;
+	letter-spacing: 4px; 
+}
+.put{
+	border: 1px solid #ccc;
+	padding: 7px 14px;
+	transition: 0.4s;
+	background: transparent;
+}
+.put~ .focus-border:before,
+.put~ .focus-border:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background-color: #3399FF;
+	transition: 0.3s;
+}
+
+.put~ .focus-border:after {
+	top: auto;
+	bottom: 0;
+	left: auto;
+	right: 0;
+}
+
+.put~ .focus-border i:before,
+.put~ .focus-border i:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2px;
+	height: 0;
+	background-color: #3399FF;
+	transition: 0.4s;
+}
+
+.put~ .focus-border i:after {
+	left: auto;
+	right: 0;
+	top: auto;
+	bottom: 0;
+}
+
+.put:focus~ .focus-border:before,
+.put:focus~ .focus-border:after,
+.has-content.put~ .focus-border:before,
+.has-content.put~ .focus-border:after {
+	width: 100%;
+	transition: 0.3s;
+}
+
+.put:focus~ .focus-border i:before,
+.put:focus~ .focus-border i:after,
+.has-content.put~ .focus-border i:before,
+.has-content.put~ .focus-border i:after {
+	height: 100%;
+	transition: 0.4s;
+}
+
+.put~ label {
+	position: absolute;
+	left: 14px;
+	top: 10px;
+	color: #ccc;
+	transition: 0.3s;
+	z-index: -1;
+	letter-spacing: 0.5px;
+}
+
+.put:focus~ label,
+.has-content.put~ label {
+	top: -8px;
+	left: 10px;
+	font-size: 12px;
+	color: #3399FF;
+	transition: 0.3s;
+	background-color: #fff;
+	z-index: 1;
+}
+.foot{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+.foot-tp{
+	height: 40px;
+	background-color: #333333;
+	line-height: 40px;
+	color: #fff;
+}
+.foot-tp font{
+	margin-left: 10px;
+}
+.foot-bt{
+	color: #000;
+}
+/*媒体查询，参考部分Bootstrap 框架*/
+
+/*当页面大于1441px 时，中等屏幕，主要是部分PC 端*/
+@media (min-width: 1441px){
+
+
+}
+/*在1200 和1440 像素之间的屏幕里，中等屏幕，主要是部分PC 端*/
+@media (min-width: 1200px) and (max-width: 1440px){
+
+.head{
+	height: 68px;
+}
+.logo{
+	width: 180px;
+	height: 48px;
+	left: 60px;
+	bottom: 8px;
+	background-size: 100% 48px;
+}
+.login-stn{
+	right: 50px;
+}
+.head-by{
+	right: 40px;
+}
+.foot-tp{
+	height: 46px;
+	line-height: 46px;
+}
+	
+}
+/*在992 和1199 像素之间的屏幕里，小屏幕，分辨率低的PC*/
+@media (min-width: 992px) and (max-width: 1199px) {
+
+.head{
+	height: 80px;
+}
+.logo{
+	width: 180px;
+	height: 50px;
+	left: 10px;
+	bottom: 2px;
+}
+.head-by{
+	right: 10px;
+	bottom: 2px;
+}
+.sectionA{
+	height: 500px;
+	background-size: 100% 500px;
+}
+.login-stn{
+	top: 60px;
+}
+.foot-tp{
+	height: 32px;
+	line-height: 32px;
+}
+
+
+}
+/*在768 和991 像素之间的屏幕里，小屏幕，主要是PAD*/
+@media (min-width: 768px) and (max-width: 991px) {
+/*未定义ipad版本*/
+}
+/*在480 和767 像素之间的屏幕里，超小屏幕，主要是手机*/
+@media (min-width: 480px) and (max-width: 767px) {
+/*未定义手机版本*/
+}
+/*在小于480 像素的屏幕，微小屏幕，更低分辨率的手机*/
+@media (max-width: 479px) {
+/*未定义手机版本*/
+}
