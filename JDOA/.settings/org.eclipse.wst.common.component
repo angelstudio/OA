@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="JDOA">
+        <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/tool"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/basic"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/JBPM4"/>
+        <property name="context-root" value="/JDOA"/>
+        <property name="java-output-path" value="/JDOA/WebRoot/WEB-INF/classes"/>
+        <property name="me-merge-utility-modules" value="true"/>
+    </wb-module>
+</project-modules>
